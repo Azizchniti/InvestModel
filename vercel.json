@@ -1,5 +1,10 @@
 {
     "version": 2,
+    "functions": {
+        "api/app.py": {
+          "runtime": "python3.10"  
+        }
+      },
     "builds": [{ "src": "app.py", "use": "@now/python" }],
     "routes": [
       { "handle": "filesystem" },
