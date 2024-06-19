@@ -7,8 +7,8 @@ from sklearn.model_selection import train_test_split
 
 app = Flask(__name__)
 
-# Load and prepare your model and scalers (as done previously)
-data = pd.read_csv('C:/Users/asus/Desktop/IM/Init.csv')
+# Load and prepare your model and scalers
+data = pd.read_csv('Init.csv')  # Use relative path
 data = pd.get_dummies(data, columns=['State'], drop_first=True)
 data['Taxa de Conversão em Vendas'] = data['Taxa de Conversão em Vendas'].str.replace('%', '').astype(float)
 data['Gain per client'] = data['Gain per client'].str.replace('[\$,]', '', regex=True).astype(float)
@@ -33,22 +33,25 @@ ridge.fit(X_train, y_train)
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    content = request.json
-    current_conversion_rate = content['current_conversion_rate']
-    current_gain_per_client = content['current_gain_per_client']
-    desired_gain = content['desired_gain']
+    try:
+        content = request.json
+        current_conversion_rate = content['current_conversion_rate']
+        current_gain_per_client = content['current_gain_per_client']
+        desired_gain = content['desired_gain']
 
-    user_input = pd.DataFrame({
-        'Taxa de Conversão em Vendas': [current_conversion_rate],
-        'Gain per client': [current_gain_per_client],
-        'Gain': [desired_gain]
-    })
+        user_input = pd.DataFrame({
+            'Taxa de Conversão em Vendas': [current_conversion_rate],
+            'Gain per client': [current_gain_per_client],
+            'Gain': [desired_gain]
+        })
 
-    user_input_scaled = scaler.transform(user_input)
-    user_input_poly = poly.transform(user_input_scaled)
-    investment_log = ridge.predict(user_input_poly)
-    investment = np.exp(investment_log)
-    return jsonify({'predicted_investment': investment[0]})
+        user_input_scaled = scaler.transform(user_input)
+        user_input_poly = poly.transform(user_input_scaled)
+        investment_log = ridge.predict(user_input_poly)
+        investment = np.exp(investment_log)
+        return jsonify({'predicted_investment': investment[0]})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
