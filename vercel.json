@@ -5,6 +5,11 @@
       { "handle": "filesystem" },
       { "src": "/predict", "dest": "lambda_function.py" },
       { "src": "/(.*)", "dest": "lambda_function.py" }
-    ]
+    ],
+    "functions": {
+      "lambda_function.py": {
+        "runtime": "python3.7"
+      }
+    }
   }
   
