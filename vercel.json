@@ -1,11 +1,10 @@
 {
     "version": 2,
     "functions": {
-        "api/app.py": {
-          "runtime": "python 3.9"  
-        }
-      },
-    "builds": [{ "src": "app.py", "use": "@now/python" }],
+      "api/app.py": {
+        "runtime": "python3.12"
+      }
+    },
     "routes": [
       { "handle": "filesystem" },
       { "src": "/predict", "dest": "app.py" },
