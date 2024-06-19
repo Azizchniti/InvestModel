@@ -1,9 +1,6 @@
 {
     "version": 2,
-    "functions": {
-      "api/app.py": {
-      }
-    },
+   
     "routes": [
       { "handle": "filesystem" },
       { "src": "/predict", "dest": "app.py" },
