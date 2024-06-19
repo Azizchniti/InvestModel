@@ -3,8 +3,8 @@
     "builds": [{ "src": "lambda_function.py", "use": "@now/python" }],
     "routes": [
       { "handle": "filesystem" },
-      { "src": "/predict", "dest": "lambda_function.p" },
-      { "src": "/(.*)", "dest": "lambda_function.p" }
+      { "src": "/predict", "dest": "lambda_function.py" },
+      { "src": "/(.*)", "dest": "lambda_function.py" }
     ]
   }
   
