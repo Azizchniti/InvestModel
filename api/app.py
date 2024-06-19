@@ -7,7 +7,7 @@ from sklearn.model_selection import train_test_split
 
 app = Flask(__name__)
 
-# Load and prepare your model and scalers
+# Load and prepare your model and scalers (copied from app.py)
 data = pd.read_csv('Init.csv')  # Use relative path
 data = pd.get_dummies(data, columns=['State'], drop_first=True)
 data['Taxa de Conversão em Vendas'] = data['Taxa de Conversão em Vendas'].str.replace('%', '').astype(float)

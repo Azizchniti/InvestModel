@@ -1,3 +1,17 @@
-__pycache__/
+# Ignore Python bytecode files
 *.pyc
+
+# Ignore system files
 .DS_Store
+
+# Ignore environment specific files
+.env
+
+# Ignore data files
+Init.csv
+
+# Ignore Vercel related files (if using Vercel)
+.vercel
+
+# Ignore virtual environment files (if using virtualenv or venv)
+venv/
