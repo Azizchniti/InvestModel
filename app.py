@@ -5,10 +5,11 @@ from sklearn.preprocessing import StandardScaler, PolynomialFeatures
 from sklearn.linear_model import Ridge
 from sklearn.model_selection import train_test_split
 from flask_cors import CORS
-import os  # Import os module for environment variables
+
 
 app = Flask(__name__)
 CORS(app)
+
 
 # Load and prepare your model and scalers (copied from app.py)
 data = pd.read_csv('Init.csv')  # Use relative path
@@ -34,10 +35,6 @@ X_train, X_test, y_train, y_test = train_test_split(X_poly, y, test_size=0.2, ra
 ridge = Ridge(alpha=1.0)
 ridge.fit(X_train, y_train)
 
-# Define a function to retrieve the environment variable 'aziz'
-def get_aziz():
-    return os.getenv('aziz')
-
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
@@ -45,10 +42,6 @@ def predict():
         current_conversion_rate = content['current_conversion_rate']
         current_gain_per_client = content['current_gain_per_client']
         desired_gain = content['desired_gain']
-
-        # Example of using the environment variable 'aziz'
-        aziz_value = get_aziz()
-        print(f"Value of aziz environment variable: {aziz_value}")
 
         user_input = pd.DataFrame({
             'Taxa de Conversão em Vendas': [current_conversion_rate],
