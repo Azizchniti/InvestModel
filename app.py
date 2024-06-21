@@ -5,11 +5,8 @@ from sklearn.preprocessing import StandardScaler, PolynomialFeatures
 from sklearn.linear_model import Ridge
 from sklearn.model_selection import train_test_split
 import os
-from dotenv import load_dotenv
 
-load_dotenv()
 
-TOKEN = os.getenv("Token")
 
 app = Flask(__name__)
 
